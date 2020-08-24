@@ -3,12 +3,8 @@ public class EmployeeWageComputation{
   //CONSTANTS DECLARATION
 	public static final int IS_PART_TIME =1;
    public static final int IS_FULL_TIME =2;
-	public static final int EMP_RATE_PER_HOUR=20;
-	public static final int NO_OF_WORKING_DAYS=20;
-	public static final int MAX_HRS_IN_A_MONTH=100;
 
-	public static int computeWage(){
-		System.out.println("****************Welcome to Employee WAge COmputation**************");
+	public static int computeWage(String company, int ratePerHr, int noOfDaysPerMonth, int maxHrsPerMonth){
 
 		//VARIABLES DECLARATION
 		int dailyHrs= 0;
@@ -18,8 +14,8 @@ public class EmployeeWageComputation{
 		int day=1;
 
 		//COMPUTE MONTHLY WAGE UNTIL MAX HOURS(100) OR MAX NO OF WORKING DAYS(20) REACHES
-
-		while(monthlyHrs<=MAX_HRS_IN_A_MONTH && day < NO_OF_WORKING_DAYS){
+		System.out.println("-----------Employee Wage Computation for "+company+"------------");
+		while(monthlyHrs<=maxHrsPerMonth && day < noOfDaysPerMonth){
 			day++;
 		//CHECK USER INPUT THROUGH RANDOM()
 			int empCheck = (int)Math.floor(Math.random()*10)%3;
@@ -44,7 +40,7 @@ public class EmployeeWageComputation{
 			monthlyHrs+=dailyHrs;
 			System.out.println("Working Hours for Day"+day+": "+monthlyHrs);
 			//COMPUTE DAILY WAGE OF AN EMPLOYEE
- 			dailyWage=dailyHrs * EMP_RATE_PER_HOUR;
+ 			dailyWage=dailyHrs * ratePerHr;
 			monthlyWage+=dailyWage;
 			System.out.println("Daily Wage of an Employee for Day" +day+":"+dailyWage);
 		}
@@ -52,8 +48,11 @@ public class EmployeeWageComputation{
 		return monthlyWage;
 	}
 
-public static void main(String[] args){
-computeWage();
-}
+	public static void main(String[] args){
+		System.out.println("****************Welcome to Employee Wage Computation**************");
+		computeWage("Accenture",15,20,84);
+      computeWage("Citi Corp",20,22,98);
+
+	}
 
 }
