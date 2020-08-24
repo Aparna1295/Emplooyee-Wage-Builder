@@ -7,7 +7,7 @@ public class EmployeeWageComputation{
 	public static final int NO_OF_WORKING_DAYS=20;
 	public static final int MAX_HRS_IN_A_MONTH=100;
 
-	public static void main(String[] args){
+	public static int computeWage(){
 		System.out.println("****************Welcome to Employee WAge COmputation**************");
 
 		//VARIABLES DECLARATION
@@ -48,9 +48,12 @@ public class EmployeeWageComputation{
 			monthlyWage+=dailyWage;
 			System.out.println("Daily Wage of an Employee for Day" +day+":"+dailyWage);
 		}
-      System.out.println("Monthly Wage of an Employee for "+day+" Days:"+monthlyWage);
-
+      System.out.println("Monthly Wage of an Employee for "+monthlyHrs+" Hours and "+day+" Days:"+monthlyWage);
+		return monthlyWage;
 	}
 
+public static void main(String[] args){
+computeWage();
+}
 
 }
