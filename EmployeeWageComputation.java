@@ -4,13 +4,29 @@ public class EmployeeWageComputation{
 	public static final int IS_PART_TIME =1;
    public static final int IS_FULL_TIME =2;
 
-	public static int computeWage(String company, int ratePerHr, int noOfDaysPerMonth, int maxHrsPerMonth){
+	//	CLASS VARIABLES
+	private final String company;
+   private final int ratePerHr;
+   private final int noOfDaysPerMonth;
+   private final int maxHrsPerMonth;
+	private int monthlyWage;
 
+	//PARAMETERIZED CONSTRUCTOR
+	public EmployeeWageComputation(String company, int ratePerHr, int noOfDaysPerMonth, int maxHrsPerMonth){
+
+		this.company=company;
+		this.ratePerHr=ratePerHr;
+		this.noOfDaysPerMonth=noOfDaysPerMonth;
+		this.maxHrsPerMonth=maxHrsPerMonth;
+
+
+	}
+
+	public void computeWage(){
 		//VARIABLES DECLARATION
 		int dailyHrs= 0;
 		int monthlyHrs=0;
 		int dailyWage=0;
-		int monthlyWage=0;
 		int day=1;
 
 		//COMPUTE MONTHLY WAGE UNTIL MAX HOURS(100) OR MAX NO OF WORKING DAYS(20) REACHES
@@ -44,14 +60,28 @@ public class EmployeeWageComputation{
 			monthlyWage+=dailyWage;
 			System.out.println("Daily Wage of an Employee for Day" +day+":"+dailyWage);
 		}
-      System.out.println("Monthly Wage of an Employee for "+monthlyHrs+" Hours and "+day+" Days:"+monthlyWage);
-		return monthlyWage;
+      System.out.println("An Employee worked for "+monthlyHrs+" Hours and "+day+" Days");
+
 	}
 
+	@Override
+	public String toString(){
+
+		return "Monthly Wage of an Employee for "+company+": " +monthlyWage;
+
+
+	}
 	public static void main(String[] args){
 		System.out.println("****************Welcome to Employee Wage Computation**************");
-		computeWage("Accenture",15,20,84);
-      computeWage("Citi Corp",20,22,98);
+		
+		//CREATE OBJECTS  TO INVOKE CLASS METHODS
+		EmployeeWage accenture = new EmployeeWage("Accenture",15,20,84);
+		EmployeeWage citicorp = new EmployeeWage("Citi Corp",20,22,98);
+		accenture.computeWage();
+		System.out.println(accenture);
+      citicorp.computeWage();
+      System.out.println(citicorp);
+
 
 	}
 
