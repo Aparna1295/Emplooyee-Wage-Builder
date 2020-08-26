@@ -1,3 +1,13 @@
+interface IComputeWage{
+
+	public void addCompany(String company,int ratePerHr, int noOfDaysPerMonth, int maxHrsPerMonth);
+	public void computeWage();
+	//public int getmonthlyWage(String company);
+
+
+}
+
+
 class CompanyWage{
 
  // CLASS VARIABLES
@@ -5,7 +15,7 @@ class CompanyWage{
    protected final int noOfDaysPerMonth;
    protected final int maxHrsPerMonth;
    protected final int ratePerHr;
-   private int monthlyWage;
+   protected int monthlyWage;
 
 	public CompanyWage(String company,int ratePerHr, int noOfDaysPerMonth, int maxHrsPerMonth){
 
@@ -13,6 +23,7 @@ class CompanyWage{
 		this.ratePerHr = ratePerHr;
 		this.noOfDaysPerMonth = noOfDaysPerMonth;
 		this.maxHrsPerMonth = maxHrsPerMonth;
+		monthlyWage=0;
 
 	}
 
@@ -32,7 +43,7 @@ class CompanyWage{
 }
 
 
-public class EmployeeWageComputation{
+public class EmployeeWageComputation implements IComputeWage{
 
   //CONSTANTS DECLARATION
 	public static final int IS_PART_TIME =1;
@@ -58,7 +69,7 @@ public class EmployeeWageComputation{
 	}
 
 
-	private void computeWage(){
+	public void computeWage(){
 
 		for(int i=0; i<numOfCompany; i++){
 
@@ -68,6 +79,10 @@ public class EmployeeWageComputation{
 		}
 
 	}
+
+	/*public int getMonthlyWage(String company){
+		return company;
+	}*/
 
 	public int computeWage(CompanyWage companyWage){
 		//VARIABLES DECLARATION
