@@ -1,8 +1,10 @@
+import java.util.*;
+
 interface IComputeWage{
 
-	public void addCompany(String company,int ratePerHr, int noOfDaysPerMonth, int maxHrsPerMonth);
+	public void addCompanyWage(String company,int ratePerHr, int noOfDaysPerMonth, int maxHrsPerMonth);
 	public void computeWage();
-	//public int getmonthlyWage(String company);
+	public int getmonthlyWage(String company);
 
 
 }
@@ -51,38 +53,42 @@ public class EmployeeWageComputation implements IComputeWage{
 
 	//	CLASS VARIABLES
 	private int numOfCompany=0;
-	private CompanyWage[] companyWageArray;
+	private LinkedList<CompanyWage> companyWageList;
+	private Map<String,CompanyWage> companyToWageMap;
 
 	//PARAMETERIZED CONSTRUCTOR
 	public EmployeeWageComputation(){
 
-	companyWageArray= new CompanyWage[5];
+		companyWageList = new LinkedList<>();
+		companyWageMap = new  HashMap<>();
 
 	}
 
 
 	private void addCompanyWage(String company,int ratePerHr, int noOfDaysPerMonth, int maxHrsPerMonth){
 
-		companyWageArray[numOfCompany]=new CompanyWage(company,ratePerHr,noOfDaysPerMonth,maxHrsPerMonth);
-		numOfCompany++;
+		CompanyWage companyWage = new  CompanyWage(company,ratePerHr,noOfDaysPerMonth,maxHrsPerMonth);
+		companyWageList.add(companyWage);
+		companyWageMap.put(company,companyWageList);
 
 	}
 
 
 	public void computeWage(){
 
-		for(int i=0; i<numOfCompany; i++){
+		for(int i=0; i<companyWageList.size(); i++){
 
-			companyWageArray[i].setMonthlyWage(this.computeWage(companyWageArray[i]));
-			System.out.println(companyWageArray[i]);
+			CompanyWage companyWage = companyWageList.get(i);
+			companyWage.setMonthlyWage(this.computeWage(companyWage));
+			System.out.println(companyWage);
 
 		}
 
 	}
 
-	/*public int getMonthlyWage(String company){
-		return company;
-	}*/
+	public int getMonthlyWage(String company){
+		return companyWageMap.get(company).monthlyWage;
+	}
 
 	public int computeWage(CompanyWage companyWage){
 		//VARIABLES DECLARATION
@@ -129,10 +135,13 @@ public class EmployeeWageComputation implements IComputeWage{
 		System.out.println("****************Welcome to Employee Wage Computation**************");
 
 		//CREATE OBJECTS  TO INVOKE CLASS METHODS
-		EmployeeWageComputation empWageCompute= new EmployeeWageComputation();
-		empWageCompute.addCompanyWage("Accenture",15,20,80);
-		empWageCompute.addCompanyWage("Citi Corp",20,25,90);
-      empWageCompute.computeWage();
+		IComputeWage empWageCompute= new EmployeeWageComputation( );
+		empWageCompute.addCompanyWage(company:"Accenture", ratePerHr:15, noOfDaysPerMonth:20, maxHrsPerMonth:80);
+		empWageCompute.addCompanyWage(company:"Citi Corp", ratePerHr:20, noOfDaysPerMonth:25, maxHrsPerMonth:90);
+      empWageCompute.computeWage( );
+		System.out.println("Monthly Wage for Company:" +empWageCompute.getMonthlyWage(company:"Accenture"));
+		System.out.println("Monthly Wage for Company:" +empWageCompute.getMonthlyWage(company:"Citi Corp"));
+
 
 	}
 
